@@ -1,0 +1,30 @@
+TASKS = {
+    "ranges": {
+        "spec": "Implement ranges(values): accept an unsorted list of integers; return sorted [start,end] inclusive runs of consecutive DISTINCT values. Empty input returns []. Do not mutate values. Example [3,1,2,2,7] -> [[1,3],[7,7]].",
+        "source": "def ranges(values):\n    return [[x, x] for x in values]\n",
+        "unit": [([[3,1,2,2,7]], [[1,3],[7,7]]), ([[]], [])],
+        "integration": [([[-2,-1,0,2]], [[-2,0],[2,2]]), ([[4,4]], [[4,4]])],
+        "heldout": [([[9,7,8,1,0,-1,9]], [[-1,1],[7,9]]), ([[0]], [[0,0]]),
+                    ([[10,2,-5,3,-4]], [[-5,-4],[2,3],[10,10]]), ([[5,4,3,2,1]], [[1,5]])],
+    },
+    "chunks": {
+        "spec": "Implement chunks(items, size): return consecutive sublists of at most size elements, preserving order. Empty items returns []. size <= 0 must raise ValueError even when items is empty. size is an integer. Do not mutate items.",
+        "source": "def chunks(items, size):\n    return [items[:size]]\n",
+        "unit": [([[1,2,3,4,5],2], [[1,2],[3,4],[5]]), ([[],2], [])],
+        "integration": [([[1],0], {"raises":"ValueError"}), ([[],0], {"raises":"ValueError"}),
+                        ([[1,2],5], [[1,2]])],
+        "heldout": [([[1,2,3],1], [[1],[2],[3]]), ([[1,2,3,4],2], [[1,2],[3,4]]),
+                    ([[], -2], {"raises":"ValueError"}), ([["a",None,"c"],2], [["a",None],["c"]])],
+    },
+    "duration": {
+        "spec": "Implement duration(text): parse exactly HH:MM:SS, with exactly two ASCII digits per field, hours 00..99, minutes and seconds 00..59. Return total seconds. Reject all other strings (including whitespace and signs) with ValueError. Input is a string.",
+        "source": "def duration(text):\n    h, m, s = text.split(':')\n    return int(h)*3600 + int(m)*60 + int(s)\n",
+        "unit": [(["01:02:03"],3723), (["00:00:00"],0), (["00:60:00"],{"raises":"ValueError"})],
+        "integration": [(["1:02:03"],{"raises":"ValueError"}), (["01:02:03 "],{"raises":"ValueError"}),
+                        (["99:59:59"],359999)],
+        "heldout": [(["00:00:60"],{"raises":"ValueError"}), (["-1:02:03"],{"raises":"ValueError"}),
+                    (["aa:00:00"],{"raises":"ValueError"}), (["10:20:30"],37230),
+                    (["\u0660\u0661:02:03"],{"raises":"ValueError"}), (["01:2:03"],{"raises":"ValueError"})],
+        "transient": True,
+    },
+}

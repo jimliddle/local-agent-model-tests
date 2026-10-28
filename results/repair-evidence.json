@@ -1,0 +1,1005 @@
+[
+  {
+    "run": "flash-20261028-182418",
+    "case": "pi-ranges-0",
+    "final_source": "def ranges(values):\n    return [[x, x] for x in values]\n",
+    "final_source_sha256": "3c8255b71c3e943f13eaf32f03fc3c442ced41615dec25ff74881bd2566d895d",
+    "checks": []
+  },
+  {
+    "run": "flash-20261028-182524",
+    "case": "pi-ranges-0",
+    "final_source": "def ranges(values):\n    result = []\n    started = False\n    start = None\n    prev = None\n\n    for x in sorted(set(values)):\n        if not started:\n            start = x\n            prev = x\n            started = True\n        elif x == prev + 1:\n            prev = x\n        else:\n            result.append([start, prev])\n            start = x\n            prev = x\n\n    if started:\n        result.append([start, prev])\n\n    return result",
+    "final_source_sha256": "5cbffce500606bfd79a52ad98ed01361bbf75f3236101205fb3d2bd160f25d0a",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "5cbffce500606bfd79a52ad98ed01361bbf75f3236101205fb3d2bd160f25d0a",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.079810542
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "5cbffce500606bfd79a52ad98ed01361bbf75f3236101205fb3d2bd160f25d0a",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.074910625
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "5cbffce500606bfd79a52ad98ed01361bbf75f3236101205fb3d2bd160f25d0a",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.074402709
+        }
+      }
+    ]
+  },
+  {
+    "run": "flash-20261028-182524",
+    "case": "pi-chunks-0",
+    "final_source": "def chunks(items, size):\n    if not isinstance(size, int):\n        raise TypeError(\"size must be an integer\")\n    if size <= 0:\n        raise ValueError(\"size must be positive\")\n\n    result = []\n    current = []\n    for item in items:\n        current.append(item)\n        if len(current) == size:\n            result.append(current)\n            current = []\n    if current:\n        result.append(current)\n    return result",
+    "final_source_sha256": "e983d9225a461d1cbe3da2b264a0f08611db8a1d8941990a596ba3db8f5f7158",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "e983d9225a461d1cbe3da2b264a0f08611db8a1d8941990a596ba3db8f5f7158",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.076276375
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "e983d9225a461d1cbe3da2b264a0f08611db8a1d8941990a596ba3db8f5f7158",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.072930625
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "e983d9225a461d1cbe3da2b264a0f08611db8a1d8941990a596ba3db8f5f7158",
+        "result": {
+          "ok": true,
+          "passed": 3,
+          "total": 3,
+          "failures": [],
+          "seconds": 0.073338542
+        }
+      }
+    ]
+  },
+  {
+    "run": "flash-20261028-182524",
+    "case": "pi-duration-0",
+    "final_source": "def duration(text):\n    if not isinstance(text, str):\n        raise TypeError(\"expected string\")\n    if len(text) != 8:\n        raise ValueError(\"invalid duration\")\n    if text[2] != ':' or text[5] != ':':\n        raise ValueError(\"invalid duration\")\n    for i in (0, 1, 3, 4, 6, 7):\n        if not ('0' <= text[i] <= '9'):\n            raise ValueError(\"invalid duration\")\n    h = int(text[0:2])\n    m = int(text[3:5])\n    s = int(text[6:8])\n    if m > 59 or s > 59:\n        raise ValueError(\"invalid duration\")\n    return h * 3600 + m * 60 + s\n",
+    "final_source_sha256": "f9e604a369b7507a6f85c7521ecbbb6a529cff3287404d6e9eddb2b135562094",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "f9e604a369b7507a6f85c7521ecbbb6a529cff3287404d6e9eddb2b135562094",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.07499125000000001
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "f9e604a369b7507a6f85c7521ecbbb6a529cff3287404d6e9eddb2b135562094",
+        "result": {
+          "ok": false,
+          "simulated": true,
+          "reason": "Temporary test-runner failure; no source edit needed. Retry unit once."
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "f9e604a369b7507a6f85c7521ecbbb6a529cff3287404d6e9eddb2b135562094",
+        "result": {
+          "ok": true,
+          "passed": 3,
+          "total": 3,
+          "failures": [],
+          "seconds": 0.072772667
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "f9e604a369b7507a6f85c7521ecbbb6a529cff3287404d6e9eddb2b135562094",
+        "result": {
+          "ok": true,
+          "passed": 3,
+          "total": 3,
+          "failures": [],
+          "seconds": 0.07412987500000001
+        }
+      }
+    ]
+  },
+  {
+    "run": "flash-20261028-182524",
+    "case": "pi-ranges-1",
+    "final_source": "def ranges(values):\n    if not values:\n        return []\n    unique = sorted(set(values))\n    result = []\n    start = unique[0]\n    end = unique[0]\n    for x in unique[1:]:\n        if x == end + 1:\n            end = x\n        else:\n            result.append([start, end])\n            start = x\n            end = x\n    result.append([start, end])\n    return result",
+    "final_source_sha256": "2090b1b033972c5baf18446c9a4a30c44c378b21103f6dcab43770807648cd30",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "2090b1b033972c5baf18446c9a4a30c44c378b21103f6dcab43770807648cd30",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.083823167
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "2090b1b033972c5baf18446c9a4a30c44c378b21103f6dcab43770807648cd30",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.076808042
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "2090b1b033972c5baf18446c9a4a30c44c378b21103f6dcab43770807648cd30",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.08129541700000001
+        }
+      }
+    ]
+  },
+  {
+    "run": "flash-20261028-182524",
+    "case": "pi-chunks-1",
+    "final_source": "def chunks(items, size):\n    if size <= 0:\n        raise ValueError(\"size must be positive\")\n    return [items[i:i+size] for i in range(0, len(items), size)]",
+    "final_source_sha256": "1bfd949e407b8d0525dd760f61a7fe7184b6b0f4d3f0c563cbfd91bd2d1f7753",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "1bfd949e407b8d0525dd760f61a7fe7184b6b0f4d3f0c563cbfd91bd2d1f7753",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.077324333
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "1bfd949e407b8d0525dd760f61a7fe7184b6b0f4d3f0c563cbfd91bd2d1f7753",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.0747505
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "1bfd949e407b8d0525dd760f61a7fe7184b6b0f4d3f0c563cbfd91bd2d1f7753",
+        "result": {
+          "ok": true,
+          "passed": 3,
+          "total": 3,
+          "failures": [],
+          "seconds": 0.074322791
+        }
+      }
+    ]
+  },
+  {
+    "run": "flash-20261028-182524",
+    "case": "pi-duration-1",
+    "final_source": "def duration(text):\n    if not isinstance(text, str):\n        raise ValueError(\"Input must be a string\")\n    if len(text) != 8:\n        raise ValueError(\"Invalid format\")\n    if text[2] != ':' or text[5] != ':':\n        raise ValueError(\"Invalid format\")\n    for i in (0, 1, 3, 4, 6, 7):\n        if not ('0' <= text[i] <= '9'):\n            raise ValueError(\"Invalid format\")\n    h = int(text[0:2])\n    m = int(text[3:5])\n    s = int(text[6:8])\n    if m > 59 or s > 59:\n        raise ValueError(\"Invalid range\")\n    return h * 3600 + m * 60 + s\n",
+    "final_source_sha256": "e65c1d77e7f11a54ae5fa7b0acd34b9ebc069c7c6c4fcc3ce0f22980c11833b7",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "e65c1d77e7f11a54ae5fa7b0acd34b9ebc069c7c6c4fcc3ce0f22980c11833b7",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.07628125
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "e65c1d77e7f11a54ae5fa7b0acd34b9ebc069c7c6c4fcc3ce0f22980c11833b7",
+        "result": {
+          "ok": false,
+          "simulated": true,
+          "reason": "Temporary test-runner failure; no source edit needed. Retry unit once."
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "e65c1d77e7f11a54ae5fa7b0acd34b9ebc069c7c6c4fcc3ce0f22980c11833b7",
+        "result": {
+          "ok": true,
+          "passed": 3,
+          "total": 3,
+          "failures": [],
+          "seconds": 0.073172
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "e65c1d77e7f11a54ae5fa7b0acd34b9ebc069c7c6c4fcc3ce0f22980c11833b7",
+        "result": {
+          "ok": true,
+          "passed": 3,
+          "total": 3,
+          "failures": [],
+          "seconds": 0.06814300000000001
+        }
+      }
+    ]
+  },
+  {
+    "run": "ornith-20261028-183530",
+    "case": "pi-ranges-0",
+    "final_source": "def ranges(values):\n    distinct = sorted(set(values))\n    result = []\n    for x in distinct:\n        if result and result[-1][1] + 1 == x:\n            result[-1][1] = x\n        else:\n            result.append([x, x])\n    return result",
+    "final_source_sha256": "de511889531e88649f533229552a7d42aee05a7a878cddbb818c0857248b2de3",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "de511889531e88649f533229552a7d42aee05a7a878cddbb818c0857248b2de3",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.081115416
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "de511889531e88649f533229552a7d42aee05a7a878cddbb818c0857248b2de3",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.07302012499999999
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "de511889531e88649f533229552a7d42aee05a7a878cddbb818c0857248b2de3",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.070512792
+        }
+      }
+    ]
+  },
+  {
+    "run": "ornith-20261028-183530",
+    "case": "pi-chunks-0",
+    "final_source": "def chunks(items, size):\n    if size <= 0:\n        raise ValueError(\"size must be positive\")\n    return [list(items[i:i + size]) for i in range(0, len(items), size)]",
+    "final_source_sha256": "5e7d7cc7cefede4bbad3b52f69ada9c387fb0cc368e909f5e06c14d6a79af70f",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "5e7d7cc7cefede4bbad3b52f69ada9c387fb0cc368e909f5e06c14d6a79af70f",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.076638625
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "5e7d7cc7cefede4bbad3b52f69ada9c387fb0cc368e909f5e06c14d6a79af70f",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.06966712500000001
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "5e7d7cc7cefede4bbad3b52f69ada9c387fb0cc368e909f5e06c14d6a79af70f",
+        "result": {
+          "ok": true,
+          "passed": 3,
+          "total": 3,
+          "failures": [],
+          "seconds": 0.073646292
+        }
+      }
+    ]
+  },
+  {
+    "run": "ornith-20261028-183530",
+    "case": "pi-duration-0",
+    "final_source": "def duration(text):\n    if not isinstance(text, str):\n        raise TypeError(\"text must be a string\")\n    parts = text.split(':')\n    if len(parts) != 3:\n        raise ValueError(\"invalid duration format\")\n    h, m, s = parts\n    for field in (h, m, s):\n        if len(field) != 2 or not field.isdigit() or not all('0' <= c <= '9' for c in field):\n            raise ValueError(\"invalid duration field\")\n    hours = int(h)\n    minutes = int(m)\n    seconds = int(s)\n    if hours < 0 or hours > 99:\n        raise ValueError(\"hours out of range\")\n    if minutes < 0 or minutes > 59:\n        raise ValueError(\"minutes out of range\")\n    if seconds < 0 or seconds > 59:\n        raise ValueError(\"seconds out of range\")\n    return hours * 3600 + minutes * 60 + seconds\n",
+    "final_source_sha256": "e4722234717061066f30824979f84056ff54e8c808233764bbe1099d8428cac4",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "e4722234717061066f30824979f84056ff54e8c808233764bbe1099d8428cac4",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.07616524999999999
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "e4722234717061066f30824979f84056ff54e8c808233764bbe1099d8428cac4",
+        "result": {
+          "ok": false,
+          "simulated": true,
+          "reason": "Temporary test-runner failure; no source edit needed. Retry unit once."
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "e4722234717061066f30824979f84056ff54e8c808233764bbe1099d8428cac4",
+        "result": {
+          "ok": true,
+          "passed": 3,
+          "total": 3,
+          "failures": [],
+          "seconds": 0.074870292
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "e4722234717061066f30824979f84056ff54e8c808233764bbe1099d8428cac4",
+        "result": {
+          "ok": true,
+          "passed": 3,
+          "total": 3,
+          "failures": [],
+          "seconds": 0.0737015
+        }
+      }
+    ]
+  },
+  {
+    "run": "ornith-20261028-183530",
+    "case": "pi-ranges-1",
+    "final_source": "def ranges(values):\n    unique = sorted(set(values))\n    if not unique:\n        return []\n    result = [[unique[0], unique[0]]]\n    for v in unique[1:]:\n        last = result[-1]\n        if v == last[1] + 1:\n            last[1] = v\n        else:\n            result.append([v, v])\n    return result",
+    "final_source_sha256": "78bbc8b9cacc8424e7d3bbe0ef344b4a7dcacd6d3a62d46a6a7b0d4fea2f55ae",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "78bbc8b9cacc8424e7d3bbe0ef344b4a7dcacd6d3a62d46a6a7b0d4fea2f55ae",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.067610209
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "78bbc8b9cacc8424e7d3bbe0ef344b4a7dcacd6d3a62d46a6a7b0d4fea2f55ae",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.074080667
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "78bbc8b9cacc8424e7d3bbe0ef344b4a7dcacd6d3a62d46a6a7b0d4fea2f55ae",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.07478183299999999
+        }
+      }
+    ]
+  },
+  {
+    "run": "ornith-20261028-183530",
+    "case": "pi-chunks-1",
+    "final_source": "def chunks(items, size):\n    if size <= 0:\n        raise ValueError(\"size must be positive\")\n    return [items[i:i + size] for i in range(0, len(items), size)]",
+    "final_source_sha256": "494b9f3968c0a3221b50464532d00122eb150c9981cf0bc218477ae7c41fab51",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "494b9f3968c0a3221b50464532d00122eb150c9981cf0bc218477ae7c41fab51",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.077176667
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "494b9f3968c0a3221b50464532d00122eb150c9981cf0bc218477ae7c41fab51",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.072428666
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "494b9f3968c0a3221b50464532d00122eb150c9981cf0bc218477ae7c41fab51",
+        "result": {
+          "ok": true,
+          "passed": 3,
+          "total": 3,
+          "failures": [],
+          "seconds": 0.072190667
+        }
+      }
+    ]
+  },
+  {
+    "run": "ornith-20261028-183530",
+    "case": "pi-duration-1",
+    "final_source": "def duration(text):\n    if not isinstance(text, str):\n        raise ValueError(\"input must be a string\")\n    parts = text.split(':')\n    if len(parts) != 3:\n        raise ValueError(\"must have exactly three fields\")\n    h, m, s = parts\n    for field in (h, m, s):\n        if len(field) != 2 or not all('0' <= ch <= '9' for ch in field):\n            raise ValueError(\"each field must be exactly two ASCII digits\")\n    hours = int(h)\n    minutes = int(m)\n    seconds = int(s)\n    if not (0 <= hours <= 99):\n        raise ValueError(\"hours out of range\")\n    if not (0 <= minutes <= 59):\n        raise ValueError(\"minutes out of range\")\n    if not (0 <= seconds <= 59):\n        raise ValueError(\"seconds out of range\")\n    return hours * 3600 + minutes * 60 + seconds\n",
+    "final_source_sha256": "b5f82c0567febf9b5c2391ef7b5ae74d3a888d1ed256f977ed2f1604fe7e4aa0",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "b5f82c0567febf9b5c2391ef7b5ae74d3a888d1ed256f977ed2f1604fe7e4aa0",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.072578541
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "b5f82c0567febf9b5c2391ef7b5ae74d3a888d1ed256f977ed2f1604fe7e4aa0",
+        "result": {
+          "ok": false,
+          "simulated": true,
+          "reason": "Temporary test-runner failure; no source edit needed. Retry unit once."
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "b5f82c0567febf9b5c2391ef7b5ae74d3a888d1ed256f977ed2f1604fe7e4aa0",
+        "result": {
+          "ok": true,
+          "passed": 3,
+          "total": 3,
+          "failures": [],
+          "seconds": 0.07364304099999999
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "b5f82c0567febf9b5c2391ef7b5ae74d3a888d1ed256f977ed2f1604fe7e4aa0",
+        "result": {
+          "ok": true,
+          "passed": 3,
+          "total": 3,
+          "failures": [],
+          "seconds": 0.0714785
+        }
+      }
+    ]
+  },
+  {
+    "run": "qwen-20261028-181454",
+    "case": "pi-ranges-0",
+    "final_source": "def ranges(values):\n    if not values:\n        return []\n    unique = sorted(set(values))\n    result = []\n    start = unique[0]\n    prev = unique[0]\n    for v in unique[1:]:\n        if v == prev + 1:\n            prev = v\n        else:\n            result.append([start, prev])\n            start = v\n            prev = v\n    result.append([start, prev])\n    return result",
+    "final_source_sha256": "9d7cd7a94cf01e0aca101773067fc7a43451912544d3dd9762136ad9e71541a5",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "9d7cd7a94cf01e0aca101773067fc7a43451912544d3dd9762136ad9e71541a5",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.079616333
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "9d7cd7a94cf01e0aca101773067fc7a43451912544d3dd9762136ad9e71541a5",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.0746095
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "9d7cd7a94cf01e0aca101773067fc7a43451912544d3dd9762136ad9e71541a5",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.07182770799999999
+        }
+      }
+    ]
+  },
+  {
+    "run": "qwen-20261028-181454",
+    "case": "pi-chunks-0",
+    "final_source": "def chunks(items, size):\n    if size <= 0:\n        raise ValueError(\"size must be positive\")\n    if not items:\n        return []\n    return [items[i:i+size] for i in range(0, len(items), size)]",
+    "final_source_sha256": "f1241fbe545283aa71e7b8bf076c0e47001bd6333442582c032b9fdabae54d0d",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "f1241fbe545283aa71e7b8bf076c0e47001bd6333442582c032b9fdabae54d0d",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.092997583
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "f1241fbe545283aa71e7b8bf076c0e47001bd6333442582c032b9fdabae54d0d",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.079927166
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "f1241fbe545283aa71e7b8bf076c0e47001bd6333442582c032b9fdabae54d0d",
+        "result": {
+          "ok": true,
+          "passed": 3,
+          "total": 3,
+          "failures": [],
+          "seconds": 0.079294209
+        }
+      }
+    ]
+  },
+  {
+    "run": "qwen-20261028-181454",
+    "case": "pi-duration-0",
+    "final_source": "def duration(text):\n    if not isinstance(text, str):\n        raise ValueError(\"Input must be a string\")\n    parts = text.split(':')\n    if len(parts) != 3:\n        raise ValueError(\"Invalid format\")\n    for part in parts:\n        if len(part) != 2:\n            raise ValueError(\"Invalid format\")\n        for ch in part:\n            if ch < '0' or ch > '9':\n                raise ValueError(\"Invalid format\")\n    h = int(parts[0])\n    m = int(parts[1])\n    s = int(parts[2])\n    if m > 59 or s > 59:\n        raise ValueError(\"Minutes and seconds must be 00-59\")\n    return h * 3600 + m * 60 + s",
+    "final_source_sha256": "42b7de2789af6de2bbf6840c5259c887596cca82d1e01c1996cf25068e46fe79",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "42b7de2789af6de2bbf6840c5259c887596cca82d1e01c1996cf25068e46fe79",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.086192583
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "42b7de2789af6de2bbf6840c5259c887596cca82d1e01c1996cf25068e46fe79",
+        "result": {
+          "ok": false,
+          "simulated": true,
+          "reason": "Temporary test-runner failure; no source edit needed. Retry unit once."
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "42b7de2789af6de2bbf6840c5259c887596cca82d1e01c1996cf25068e46fe79",
+        "result": {
+          "ok": true,
+          "passed": 3,
+          "total": 3,
+          "failures": [],
+          "seconds": 0.077711
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "42b7de2789af6de2bbf6840c5259c887596cca82d1e01c1996cf25068e46fe79",
+        "result": {
+          "ok": true,
+          "passed": 3,
+          "total": 3,
+          "failures": [],
+          "seconds": 0.080743542
+        }
+      }
+    ]
+  },
+  {
+    "run": "qwen-20261028-181454",
+    "case": "pi-ranges-1",
+    "final_source": "def ranges(values):\n    if not values:\n        return []\n    distinct = sorted(set(values))\n    result = []\n    start = distinct[0]\n    prev = distinct[0]\n    for x in distinct[1:]:\n        if x == prev + 1:\n            prev = x\n        else:\n            result.append([start, prev])\n            start = x\n            prev = x\n    result.append([start, prev])\n    return result",
+    "final_source_sha256": "19f8ae341b21597af52756abe813f16d323f002487e84de34687eece5325c885",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "19f8ae341b21597af52756abe813f16d323f002487e84de34687eece5325c885",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.076161459
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "19f8ae341b21597af52756abe813f16d323f002487e84de34687eece5325c885",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.074182125
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "19f8ae341b21597af52756abe813f16d323f002487e84de34687eece5325c885",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.075990417
+        }
+      }
+    ]
+  },
+  {
+    "run": "qwen-20261028-181454",
+    "case": "pi-chunks-1",
+    "final_source": "def chunks(items, size):\n    if size <= 0:\n        raise ValueError(\"size must be positive\")\n    return [items[i:i + size] for i in range(0, len(items), size)]",
+    "final_source_sha256": "494b9f3968c0a3221b50464532d00122eb150c9981cf0bc218477ae7c41fab51",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "494b9f3968c0a3221b50464532d00122eb150c9981cf0bc218477ae7c41fab51",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.08441908299999999
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "494b9f3968c0a3221b50464532d00122eb150c9981cf0bc218477ae7c41fab51",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.07706025
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "494b9f3968c0a3221b50464532d00122eb150c9981cf0bc218477ae7c41fab51",
+        "result": {
+          "ok": true,
+          "passed": 3,
+          "total": 3,
+          "failures": [],
+          "seconds": 0.080791791
+        }
+      }
+    ]
+  },
+  {
+    "run": "qwen-20261028-181454",
+    "case": "pi-duration-1",
+    "final_source": "def duration(text):\n    if not isinstance(text, str):\n        raise ValueError(\"Input must be a string\")\n    \n    parts = text.split(':')\n    if len(parts) != 3:\n        raise ValueError(\"Invalid format\")\n    \n    h_str, m_str, s_str = parts\n    \n    for field in (h_str, m_str, s_str):\n        if len(field) != 2:\n            raise ValueError(\"Invalid field length\")\n        for ch in field:\n            if ord(ch) < 48 or ord(ch) > 57:\n                raise ValueError(\"Invalid character\")\n    \n    h = int(h_str)\n    m = int(m_str)\n    s = int(s_str)\n    \n    if h > 99:\n        raise ValueError(\"Hours out of range\")\n    if m > 59:\n        raise ValueError(\"Minutes out of range\")\n    if s > 59:\n        raise ValueError(\"Seconds out of range\")\n    \n    return h * 3600 + m * 60 + s",
+    "final_source_sha256": "6deb91c89dfb4d8e8b5596a4db94a41776f994ddf0b91764c57f6b3837794cb9",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "6deb91c89dfb4d8e8b5596a4db94a41776f994ddf0b91764c57f6b3837794cb9",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.08301529099999999
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "6deb91c89dfb4d8e8b5596a4db94a41776f994ddf0b91764c57f6b3837794cb9",
+        "result": {
+          "ok": false,
+          "simulated": true,
+          "reason": "Temporary test-runner failure; no source edit needed. Retry unit once."
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "6deb91c89dfb4d8e8b5596a4db94a41776f994ddf0b91764c57f6b3837794cb9",
+        "result": {
+          "ok": true,
+          "passed": 3,
+          "total": 3,
+          "failures": [],
+          "seconds": 0.077618
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "6deb91c89dfb4d8e8b5596a4db94a41776f994ddf0b91764c57f6b3837794cb9",
+        "result": {
+          "ok": true,
+          "passed": 3,
+          "total": 3,
+          "failures": [],
+          "seconds": 0.076874
+        }
+      }
+    ]
+  },
+  {
+    "run": "nanbeige-20261028-191257",
+    "case": "pi-ranges-0",
+    "final_source": "def ranges(values):\n    ordered = sorted(set(values))\n    runs = []\n    for value in ordered:\n        if runs and value == runs[-1][1] + 1:\n            runs[-1][1] = value\n        else:\n            runs.append([value, value])\n    return runs",
+    "final_source_sha256": "a79e3c47b721bbb583fd2244ecd0e64409fe0dccc5fd3d9762e16f82de57dc24",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "a79e3c47b721bbb583fd2244ecd0e64409fe0dccc5fd3d9762e16f82de57dc24",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.132766417
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "a79e3c47b721bbb583fd2244ecd0e64409fe0dccc5fd3d9762e16f82de57dc24",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.084562417
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "a79e3c47b721bbb583fd2244ecd0e64409fe0dccc5fd3d9762e16f82de57dc24",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.081523709
+        }
+      }
+    ]
+  },
+  {
+    "run": "nanbeige-20261028-191257",
+    "case": "pi-chunks-0",
+    "final_source": "def chunks(items, size):\n    if size <= 0:\n        raise ValueError(\"size must be a positive integer\")\n    result = []\n    for start in range(0, len(items), size):\n        result.append(list(items[start:start + size]))\n    return result\n",
+    "final_source_sha256": "5711d2bf3fc2cd324c53cb91a665f57f073afacd3f902b4234ed3e5fe20cdd0e",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "5711d2bf3fc2cd324c53cb91a665f57f073afacd3f902b4234ed3e5fe20cdd0e",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.082048667
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "5711d2bf3fc2cd324c53cb91a665f57f073afacd3f902b4234ed3e5fe20cdd0e",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.0816515
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "5711d2bf3fc2cd324c53cb91a665f57f073afacd3f902b4234ed3e5fe20cdd0e",
+        "result": {
+          "ok": true,
+          "passed": 3,
+          "total": 3,
+          "failures": [],
+          "seconds": 0.070736333
+        }
+      }
+    ]
+  },
+  {
+    "run": "nanbeige-20261028-191257",
+    "case": "pi-duration-0",
+    "final_source": "def duration(text):\n    if not isinstance(text, str):\n        raise TypeError(\"text must be a string\")\n\n    parts = text.split(':')\n    if len(parts) != 3:\n        raise ValueError(\"text must be exactly HH:MM:SS\")\n\n    digits = '0123456789'\n    hours = minutes = seconds = 0\n    for index, part in enumerate(parts):\n        if len(part) != 2 or part[0] not in digits or part[1] not in digits:\n            raise ValueError(\"each field must be exactly two ASCII digits\")\n        value = int(part)\n        if index == 0:\n            hours = value  # exactly two ASCII digits guarantees 00..99\n        elif index == 1:\n            if value > 59:\n                raise ValueError(\"minutes must be 00..59\")\n            minutes = value\n        else:\n            if value > 59:\n                raise ValueError(\"seconds must be 00..59\")\n            seconds = value\n\n    return hours * 3600 + minutes * 60 + seconds\n",
+    "final_source_sha256": "45490d86facbb8436ea9b8c64dd5b832f8427d124ebd33580ffe2bb14d8f837d",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "45490d86facbb8436ea9b8c64dd5b832f8427d124ebd33580ffe2bb14d8f837d",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.109690375
+        }
+      }
+    ]
+  },
+  {
+    "run": "nanbeige-20261028-192240",
+    "case": "pi-ranges-0",
+    "final_source": "def ranges(values):\n    ordered = sorted(set(values))\n    runs = []\n    for value in ordered:\n        if runs and value == runs[-1][1] + 1:\n            runs[-1][1] = value\n        else:\n            runs.append([value, value])\n    return runs\n",
+    "final_source_sha256": "ce5e40f8fbf5ab800308e23a7d815c46c5ec4e8b7639846b0cc69a5fa421c10c",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "ce5e40f8fbf5ab800308e23a7d815c46c5ec4e8b7639846b0cc69a5fa421c10c",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.090509417
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "ce5e40f8fbf5ab800308e23a7d815c46c5ec4e8b7639846b0cc69a5fa421c10c",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.080816125
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "ce5e40f8fbf5ab800308e23a7d815c46c5ec4e8b7639846b0cc69a5fa421c10c",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.089449709
+        }
+      }
+    ]
+  },
+  {
+    "run": "nanbeige-20261028-192240",
+    "case": "pi-chunks-0",
+    "final_source": "def chunks(items, size):\n    if size <= 0:\n        raise ValueError(\"size must be a positive integer\")\n    result = []\n    for i in range(0, len(items), size):\n        result.append(list(items[i:i + size]))\n    return result",
+    "final_source_sha256": "9f824208553c826ae5147690f1699072ff6a0321e1b71503b485c17077480426",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "9f824208553c826ae5147690f1699072ff6a0321e1b71503b485c17077480426",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.08864712500000001
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "9f824208553c826ae5147690f1699072ff6a0321e1b71503b485c17077480426",
+        "result": {
+          "ok": true,
+          "passed": 2,
+          "total": 2,
+          "failures": [],
+          "seconds": 0.08282066700000001
+        }
+      },
+      {
+        "check": "integration",
+        "source_hash": "9f824208553c826ae5147690f1699072ff6a0321e1b71503b485c17077480426",
+        "result": {
+          "ok": true,
+          "passed": 3,
+          "total": 3,
+          "failures": [],
+          "seconds": 0.090526166
+        }
+      }
+    ]
+  },
+  {
+    "run": "nanbeige-20261028-192240",
+    "case": "pi-duration-0",
+    "final_source": "def duration(text):\n    if not isinstance(text, str):\n        raise TypeError(\"text must be a string\")\n\n    parts = text.split(':')\n    if len(parts) != 3:\n        raise ValueError(\"duration must be exactly HH:MM:SS\")\n\n    limits = (99, 59, 59)\n    total_seconds = 0\n\n    for part, limit in zip(parts, limits):\n        if len(part) != 2:\n            raise ValueError(\"each field must be exactly two digits\")\n        for ch in part:\n            if not (48 <= ord(ch) <= 57):  # ASCII '0'..'9'\n                raise ValueError(\"fields must contain ASCII digits only\")\n        value = int(part)\n        if value > limit:\n            raise ValueError(\"field value out of range\")\n        total_seconds += value\n\n    return total_seconds\n",
+    "final_source_sha256": "45175c9b27bbff1e9b0935f20dd8dbf9afdb4055bc64200309ec8fb282e8a405",
+    "checks": [
+      {
+        "check": "syntax",
+        "source_hash": "45175c9b27bbff1e9b0935f20dd8dbf9afdb4055bc64200309ec8fb282e8a405",
+        "result": {
+          "ok": true,
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.069785958
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "45175c9b27bbff1e9b0935f20dd8dbf9afdb4055bc64200309ec8fb282e8a405",
+        "result": {
+          "ok": false,
+          "simulated": true,
+          "reason": "Temporary test-runner failure; no source edit needed. Retry unit once."
+        }
+      },
+      {
+        "check": "unit",
+        "source_hash": "45175c9b27bbff1e9b0935f20dd8dbf9afdb4055bc64200309ec8fb282e8a405",
+        "result": {
+          "ok": false,
+          "passed": 2,
+          "total": 3,
+          "failures": [
+            {
+              "case": 0,
+              "actual": "6",
+              "expected": 3723
+            }
+          ],
+          "seconds": 0.065077625
+        }
+      }
+    ]
+  }
+]
